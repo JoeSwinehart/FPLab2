@@ -51,7 +51,10 @@ ggplot(relation, aes(slope)) +
                    color = "white", 
                    binwidth = 1) +
   labs(title = "Distribution of Student Math Scores",
-       y = "")
+       y = "") +
+  geom_vline(xintercept = mean(slopes2),
+             colour = "#FFE394", 
+             size = 1.5)
 
 ```
 
