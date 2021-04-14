@@ -14,3 +14,32 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Lab 2 - Part A: Multiple Models
+```{r initial code chunk}
+file <- "https://github.com/datalorax/esvis/raw/master/data/benchmarks.rda"
+load(url(file))
+head(benchmarks)
+```
+
+```{r code chunk 2}
+library(tidyverse)
+
+benchmarks <- benchmarks %>%
+	as_tibble() %>%
+	mutate(wave = case_when(season == "Fall" ~ 0,
+	                        season == "Winter" ~ 1,
+	                        TRUE ~ 2))
+
+```
+
+
+## Lab 2 - Part B: Star Wars
+```{r initial install}
+install.packages("repurrrsive")
+library(repurrrsive)
+```
+
+
+## Lab 2 - Part C: Some basic API calls
+
+
+
