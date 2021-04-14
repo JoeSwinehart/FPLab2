@@ -61,6 +61,19 @@ ggplot(relation, aes(slope)) +
 install.packages("repurrrsive")
 library(repurrrsive)
 
+Characters_films <- sw_films %>% 
+  map(list("characters")) %>% 
+  # map(~mutate(.x, listnums = count("characters")))
+  # map(summary) %>% 
+  #leaving in commented mapping code for... future ideas
+  map_dbl(~length(.x))
+
+Characters_films[3]
+#number of characters in film three = 34, yay!
+
+Species_films <- sw_species %>% 
+  map(list("name")) %>% 
+  # This pulls the names, more work to be done...
 
 ```
 
