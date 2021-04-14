@@ -29,6 +29,27 @@ benchmarks <- benchmarks %>%
 	                        season == "Winter" ~ 1,
 	                        TRUE ~ 2))
 
+by_sid <- split(benchmarks, benchmarks$sid)
+
+perc <- map(by_sid, ~mutate(.x, percent = math / sid))
+
+math_score <- map(perc, ~lm(math ~ wave, data = .x))
+str(math_score)
+
+coefs <- map(math_score, coef)
+coefs[c(1:2, length(coefs))]
+
+slopes <- map_dbl(coefs, 2)
+slopes
+
+relation <- tibble(year = names(slopes),
+                   slope = slopes)
+
+
+ggplot(relation, aes(slope)) +
+    geom_histogram(fill = "cornflowerblue",
+                   color = "white")
+
 ```
 
 
@@ -36,6 +57,8 @@ benchmarks <- benchmarks %>%
 ```{r initial install}
 install.packages("repurrrsive")
 library(repurrrsive)
+
+
 ```
 
 
