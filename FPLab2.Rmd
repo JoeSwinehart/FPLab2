@@ -83,5 +83,17 @@ Species_films <- sw_species %>%
 
 ## Lab 2 - Part C: Some basic API calls
 
+```{r}
+library(httr)
+
+# Ability 1
+ability1 <- GET("https://pokeapi.co/api/v2/ability/1") %>%
+	content("parsed") 
+
+abilities <- vector("list", length(ability1))
+
+map(abilities, ~GET("https://pokeapi.co/api/v2/ability/1") %>%
+	content("parsed") )
+```
 
 
