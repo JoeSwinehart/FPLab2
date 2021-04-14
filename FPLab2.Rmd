@@ -45,10 +45,15 @@ slopes
 relation <- tibble(year = names(slopes),
                    slope = slopes)
 
+relation2 <-na.omit(relation)
+relation2
 
-ggplot(relation, aes(slope)) +
-    geom_histogram(fill = "cornflowerblue",
-                   color = "white")
+ggplot(relation2, aes(slope)) +
+    geom_histogram(fill = "#87a96b",
+                   color = "white", 
+                   binwidth = 1) +
+  labs(title = "Distribution of Student Math Scores",
+       y = "")
 
 ```
 
