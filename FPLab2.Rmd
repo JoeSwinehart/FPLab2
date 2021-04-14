@@ -40,15 +40,13 @@ coefs <- map(math_score, coef)
 coefs[c(1:2, length(coefs))]
 
 slopes <- map_dbl(coefs, 2)
-slopes
 
-relation <- tibble(year = names(slopes),
-                   slope = slopes)
+slopes2 <- na.omit(slopes)
 
-relation2 <-na.omit(relation)
-relation2
+relation <- tibble(year = names(slopes2),
+                   slope = slopes2)
 
-ggplot(relation2, aes(slope)) +
+ggplot(relation, aes(slope)) +
     geom_histogram(fill = "#87a96b",
                    color = "white", 
                    binwidth = 1) +
