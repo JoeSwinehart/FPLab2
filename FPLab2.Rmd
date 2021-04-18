@@ -92,9 +92,15 @@ abilities <-
 map(1:5, ~content(GET(paste0("https://pokeapi.co/api/v2/ability/", .x)), "parsed"))
 
 # Create data frame
-by_df <- split(abilities, 1:5) #ignore this it broken
-
-
+names <- map_chr(abilities, ~.x$name)
+counts <- map_dbl(abilities, ~length(.x$pokemon))
+ability_sum <- data.frame(names, counts)
+ability_sum
 ```
 
+Bonus: Create a new data frame that lists the names of the pokemon with these specific abilities.
+
+```{r Bonus}
+
+```
 
