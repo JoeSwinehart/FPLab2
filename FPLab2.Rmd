@@ -61,7 +61,7 @@ ggplot(relation, aes(slope)) +
 
 ## Lab 2 - Part B: Star Wars
 ```{r initial install}
-install.packages("repurrrsive")
+#install.packages("repurrrsive")
 library(repurrrsive)
 
 Characters_films <- sw_films %>% 
@@ -85,15 +85,16 @@ Species_films <- sw_species %>%
 
 ```{r}
 library(httr)
+library(jsonlite)
 
-# Ability 1
-ability1 <- GET("https://pokeapi.co/api/v2/ability/1") %>%
-	content("parsed") 
+# Abilities 1-5
+abilities <-
+map(1:5, ~content(GET(paste0("https://pokeapi.co/api/v2/ability/", .x)), "parsed"))
 
-abilities <- vector("list", length(ability1))
+# Create data frame
+by_df <- split(abilities, 1:5) #ignore this it broken
 
-map(abilities, ~GET("https://pokeapi.co/api/v2/ability/1") %>%
-	content("parsed") )
+
 ```
 
 
