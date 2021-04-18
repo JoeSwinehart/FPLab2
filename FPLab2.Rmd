@@ -63,20 +63,27 @@ ggplot(relation, aes(slope)) +
 ```{r initial install}
 #install.packages("repurrrsive")
 library(repurrrsive)
+library(magrittr)
+library(naniar)
 
 Characters_films <- sw_films %>% 
   map(list("characters")) %>% 
-  # map(~mutate(.x, listnums = count("characters")))
-  # map(summary) %>% 
-  #leaving in commented mapping code for... future ideas
-  map_dbl(~length(.x))
+  map_dbl(~length(.x)) %>% 
+  data.frame(movie = c(1:7),
+             number_characters = .)
 
-Characters_films[3]
-#number of characters in film three = 34, yay!
+na_strings <- c("n/a", "none", "unknown")
 
 Species_films <- sw_species %>% 
-  map(list("name")) %>% 
-  # This pulls the names, more work to be done...
+  map_dfr(extract, c("name", "hair_colors")) %>% 
+  replace_with_na_all(condition = ~.x %in% na_strings) %>% 
+  drop_na()
+  
+  
+  
+# Extra Code for future ideas / remembering what did NOT work
+    # map(~mutate(.x, listnums = count("characters")))
+  # map(summary) %>% 
 
 ```
 
